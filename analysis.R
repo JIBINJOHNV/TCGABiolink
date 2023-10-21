@@ -18,6 +18,12 @@ expdat <- GDCprepare(query = query.exp.hg38,save = TRUE, save.filename = "exp.rd
 BRCAMatrix <- assay(expdat,"unstranded") 
 # For gene expression if you need to see a boxplot correlation and AAIC plot to define outliers you can run
 BRCA.RNAseq_CorOutliers <- TCGAanalyze_Preprocessing(expdat)
+write.csv(BRCA.RNAseq_CorOutliers, file = "TCGA-LIHC_STARCounts_unstranded.csv", row.names = FALSE)
+
+metadata<-as.data.frame(expdat@colData@listData)
+write.csv(metadata, file = "TCGA-LIHC_metadata.csv", row.names = FALSE)
+
+
 
 
 samplesDown <- getResults(query.exp.hg38,cols=c("cases"))
